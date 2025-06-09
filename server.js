@@ -8,16 +8,21 @@ const authRoutes = require('./routes/auth'); // Using your updated role-based lo
 const productRoutes = require('./routes/productRoute');
 const tshirtRoute = require('./routes/tshirts');
 const updateRoute = require('./routes/Update')
+const cartRoute = require('./routes/cart')
+const checkRoute = require('./routes/checkout')
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // Use auth routes (handles /register, /login, /profile)
-app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/tshirt', tshirtRoute);
-app.use('/api/put',updateRoute)
+app.use('/api/auth', authRoutes); //for login//
+app.use('/api/products', productRoutes); //for add a products//
+app.use('/api/tshirt', tshirtRoute); //for get a products//
+app.use('/api/put',updateRoute) // for update a products //
+app.use('/api/cart',cartRoute) //for cart //
+app.use('/api/checkout',checkRoute) //for checkout //
+
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://dinesh071077:ndGAfgn87mnTeglt@cluster0.ljbtvt1.mongodb.net/myDB?retryWrites=true&w=majority', {

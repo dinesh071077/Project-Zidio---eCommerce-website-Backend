@@ -25,4 +25,21 @@ router.get('/type/:tshirtType', async (req, res) => {
   }
 });
 
+// GET a single T-shirt by ID
+router.get('/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({ error: 'T-shirt not found' });
+    }
+
+    res.json(product);
+  } catch (err) {
+    console.error('Error fetching product:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
 module.exports = router;
