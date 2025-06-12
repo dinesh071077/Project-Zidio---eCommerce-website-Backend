@@ -77,6 +77,30 @@ router.get("/profile", authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+// admin panel//
+// Get all users — for admin (no auth needed)
+router.get('/all-users', async (req, res) => {
+  try {
+    const users = await User.find().select('-password'); // hide password
+    res.status(200).json({ users });
+  } catch (err) {
+    console.error('Error fetching users:', err);
+    res.status(500).json({ message: 'Failed to fetch users' });
+  }
+});
+
+// DELETE /api/auth/:userId
+router.delete('/:userId', async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.userId);
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (err) {
+    console.error('Delete error:', err);
+    res.status(500).json({ message: 'Failed to delete user' });
+  }
+});
+
+
 
 
 module.exports = router;

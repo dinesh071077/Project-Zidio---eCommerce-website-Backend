@@ -160,6 +160,16 @@ router.get('/my-orders', authenticate, async (req, res) => {
   }
 });
 
+// 5. Get all orders for admin (no auth check)
+router.get('/all', async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 });
+    res.status(200).json({ orders });
+  } catch (error) {
+    console.error('Admin fetching orders failed:', error);
+    res.status(500).json({ message: 'Failed to fetch all orders' });
+  }
+});
 
 
 module.exports = router;

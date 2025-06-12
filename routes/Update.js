@@ -61,4 +61,34 @@ router.delete('/delete/:id', async (req, res) => {
   }
 });
 
+//Edit//
+// GET single product by ID
+router.get('/single/:id', async (req, res) => {
+  try {
+    const tshirt = await Product.findById(req.params.id);
+    if (!tshirt) {
+      return res.status(404).json({ message: 'T-shirt not found' });
+    }
+    res.json(tshirt);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+// PUT: /api/put/update/:id
+router.put('/update/:id', async (req, res) => {
+  try {
+    const updated = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updated) return res.status(404).json({ message: 'T-shirt not found' });
+    res.json({ message: 'T-shirt updated successfully', product: updated });
+  } catch (err) {
+    console.error('Update error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
 module.exports = router;

@@ -10,6 +10,7 @@ const tshirtRoute = require('./routes/tshirts');
 const updateRoute = require('./routes/Update')
 const cartRoute = require('./routes/cart')
 const checkRoute = require('./routes/checkout')
+const dashboardRoute = require('./routes/dashboardConroller')
 
 const app = express();
 app.use(cors());
@@ -22,6 +23,7 @@ app.use('/api/tshirt', tshirtRoute); //for get a products//
 app.use('/api/put',updateRoute) // for update a products //
 app.use('/api/cart',cartRoute) //for cart //
 app.use('/api/checkout',checkRoute) //for checkout //
+app.use('/api/admin',dashboardRoute) //for dashboard//
 
 
 // Connect to MongoDB
