@@ -11,6 +11,7 @@ const updateRoute = require('./routes/Update')
 const cartRoute = require('./routes/cart')
 const checkRoute = require('./routes/checkout')
 const dashboardRoute = require('./routes/dashboardConroller')
+const customerRoute = require('./routes/support')
 
 const app = express();
 app.use(cors());
@@ -24,6 +25,7 @@ app.use('/api/put',updateRoute) // for update a products //
 app.use('/api/cart',cartRoute) //for cart //
 app.use('/api/checkout',checkRoute) //for checkout //
 app.use('/api/admin',dashboardRoute) //for dashboard//
+app.use('/api/support',customerRoute) //forcustomer support//
 
 
 // Connect to MongoDB
